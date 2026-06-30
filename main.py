@@ -38,16 +38,21 @@ async def run_bot():
     bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     dp = Dispatcher()
 
-    # ✅ الحل: استورد الراوتر الرئيسي بس من commands
+    # ✅ استورد الراوترات من كل المجلدات
     from commands import router as main_router
-    
-    # ✅ استورد راوتر الادمن الجديد
     from admin import router as admin_router
     
-    # ✅ ضيفهم مرة واحدة بس
+    # ✅ استدعاء مجلد الفحص (functions)
+    try:
+        from functions import router as functions_router
+        dp.include_router(functions_router)
+    except ImportError:
+        # لو الكود متسجل جوه ملف co مباشر داخل commands
+        pass
+
+    # ✅ ربط الراوترات بالديسباتشر
     dp.include_router(main_router)
     dp.include_router(admin_router)
-
     @dp.error()
     async def error_handler(event, data):
         logger.error(f"Handler error: {data.get('exception')}", exc_info=True)
