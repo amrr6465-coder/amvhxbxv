@@ -38,26 +38,16 @@ async def run_bot():
     bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     dp = Dispatcher()
 
-    # ✅ استيراد الراوترات الأساسية
+    # ✅ الحل: استورد الراوتر الرئيسي بس من commands
     from commands import router as main_router
+    
+    # ✅ استورد راوتر الادمن الجديد
     from admin import router as admin_router
     
-    # 🚀 ربط ملف الفحص مباشرة (تأكد من اسم الملف ومجلده)
-    try:
-        # لو الملف اسمه co.py وموجود جوه مجلد commands
-        from commands.co import router as co_router
-        dp.include_router(co_router)
-    except ImportError:
-        try:
-            # لو الملف اسمه co.py وموجود جوه مجلد functions
-            from functions.co import router as co_router
-            dp.include_router(co_router)
-        except ImportError:
-            logger.error("❌ لم يتم العثور على ملف co.py في مجلد commands أو functions")
-
-    # ✅ تفعيل باقي الراوترات
+    # ✅ ضيفهم مرة واحدة بس
     dp.include_router(main_router)
     dp.include_router(admin_router)
+
     @dp.error()
     async def error_handler(event, data):
         logger.error(f"Handler error: {data.get('exception')}", exc_info=True)
