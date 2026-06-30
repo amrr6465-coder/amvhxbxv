@@ -16,8 +16,8 @@ BIN_API_URL = "https://bindb.rythampkhandelwal.workers.dev/bin/{bin}"
 
 BOT_NAME = "𝗖𝗔𝗦𝗛 𝗣𝗔𝗬"
 BOT_USERNAME = os.getenv("BOT_USERNAME", "Cash_Payment_bot")
-SUPPORT_USERNAME = "@afuonax"
-OWNER_USERNAME = "@AFUONA_V"
+SUPPORT_USERNAME = "@ankabot6"
+OWNER_USERNAME = "@z_0_y2"
 
 FREE_DAILY_LIMIT = 50
 
