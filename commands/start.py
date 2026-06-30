@@ -52,7 +52,7 @@ async def _home_screen(target, user, edit=False):
         f"<blockquote>"
         f"One day I will be the best {EMOJI['num_1']}"
         f"</blockquote>\n\n"
-        f"𝗺𝗮𝗱𝗲 𝗯𝘆 @afuonax "
+        f"𝗺𝗮𝗱𝗲 𝗯𝘆 @ankabot6 "
         
     )
 
