@@ -38,19 +38,24 @@ async def run_bot():
     bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     dp = Dispatcher()
 
-    # ✅ استورد الراوترات من كل المجلدات
+    # ✅ استيراد الراوترات الأساسية
     from commands import router as main_router
     from admin import router as admin_router
     
-    # ✅ استدعاء مجلد الفحص (functions)
+    # 🚀 ربط ملف الفحص مباشرة (تأكد من اسم الملف ومجلده)
     try:
-        from functions import router as functions_router
-        dp.include_router(functions_router)
+        # لو الملف اسمه co.py وموجود جوه مجلد commands
+        from commands.co import router as co_router
+        dp.include_router(co_router)
     except ImportError:
-        # لو الكود متسجل جوه ملف co مباشر داخل commands
-        pass
+        try:
+            # لو الملف اسمه co.py وموجود جوه مجلد functions
+            from functions.co import router as co_router
+            dp.include_router(co_router)
+        except ImportError:
+            logger.error("❌ لم يتم العثور على ملف co.py في مجلد commands أو functions")
 
-    # ✅ ربط الراوترات بالديسباتشر
+    # ✅ تفعيل باقي الراوترات
     dp.include_router(main_router)
     dp.include_router(admin_router)
     @dp.error()
