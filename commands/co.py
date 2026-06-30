@@ -46,6 +46,7 @@ def get_proxy_url(proxy_str: str) -> str:
 
 
 async def _pick_proxy(user_id: int = None) -> str:
+    await msg.answer("⏳ جاري الفحص... انتظر ثواني")
     if user_id:
         mode = await db.get_user_proxy_mode(user_id)
         if mode == "own":
