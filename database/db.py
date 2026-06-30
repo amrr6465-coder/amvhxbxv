@@ -7,7 +7,10 @@ import asyncio
 from datetime import datetime, date, timedelta, timezone
 from config import FREE_DAILY_LIMIT
 
-DB_PATH = "bot_database.db"
+# ضبط المسار ليكون دائماً داخل مجلد database بشكل ديناميكي بغض النظر عن مكان الاستدعاء
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "bot_database.db")
+
 _db_connection = None
 _lock = asyncio.Lock()
 
